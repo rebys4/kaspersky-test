@@ -1,0 +1,29 @@
+{
+  "name": "kaspersky",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "scripts"
+  ],
+  "scripts": {
+    "db:gen": "drizzle-kit generate --config backend/drizzle.config.ts",
+    "db:migrate": "tsx backend/src/db/migrate.ts",
+    "seed": "npm run db:gen && npm run db:migrate && tsx backend/src/db/seed.ts",
+    "dev:api": "tsx backend/src/server.ts",
+    "backup": "tsx scripts/backup.ts",
+    "restore": "tsx scripts/restore.ts backup.jsonl",
+    "dev:web": "cd frontend && vite",
+    "dev": "concurrently -k \"npm:dev:api\" \"npm:dev:web\""
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.14",
+    "@types/better-sqlite3": "^7.6.13",
+    "better-sqlite3": "^12.4.1",
+    "concurrently": "^9.0.0",
+    "drizzle-kit": "^0.31.5",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.6.2"
+  }
+}
